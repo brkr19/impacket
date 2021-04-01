@@ -133,12 +133,11 @@ class TargetsProcessor:
                     tmpTarget =  '%s://%s@%s' % (target.scheme, identity.replace('/','\\'), target.netloc)
                     match = [x for x in self.finishedAttacks if x.geturl().upper() == tmpTarget.upper()]
                     if len(match) == 0:
-                        self.generalCandidates.remove(target)
                         return target
                 LOG.debug("No more targets for user %s" % identity)
                 return None
             else:
-                return self.generalCandidates.pop()
+                return self.generalCandidates[0]
         else:
             if len(self.originalTargets) > 0:
                 self.generalCandidates = [x for x in self.originalTargets if
